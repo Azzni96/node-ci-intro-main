@@ -21,6 +21,11 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v4
+    - name: Start Mysql 
+      run: |
+          sudo systemctl start mysql
+          cp .env.sample .env
+          sudo mysql -uroot < db/create-db.sql
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v4
       with:
